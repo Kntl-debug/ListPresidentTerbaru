@@ -1,1 +1,0 @@
-# ListPresidentTerbaru
