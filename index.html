@@ -83,8 +83,18 @@
     }
     .counter {
       font-size: 0.9rem;
-      color: 6s ease-in-out infinite;
-      box-shadow: 0 8px 24px rgba(34, 197, 94, 0.3);
+      color: #1e293b;
+    }
+    .btn-wa {
+      display: inline-block;
+      background-color: #22c55e;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 16px;
+      animation: float 6s ease-in-out infinite;
     }
     .btn-wa:hover {
       background-color: #16a34a;
@@ -114,7 +124,7 @@
   <div class="container">
     <h2>Galeri Testimoni</h2>
     <div class="slider" onclick="openModal()">
-      <img id="testimoniImage1" class="glow-testi" src="https://files.catbox.moe/nx3kh3.jpg" alt="Testimoni 1" />
+      <img id="testimoniImage1" class="active" src="https://files.catbox.moe/nx3kh3.jpg" alt="Testimoni 1" />
       <img id="testimoniImage2" src="https://files.catbox.moe/nx3kh3.jpg" alt="Testimoni 2" />
     </div>
     <div class="nav-buttons">
@@ -125,9 +135,12 @@
     <a href="https://wa.me/6281234567890" target="_blank" class="btn-wa">Yuk Beli!</a>
   </div>
 
-  <!-- Modal zoom -->
   <div id="zoomModal" class="modal" onclick="closeModal()">
-   testimoniImage1", "testimoniImage2"];
+    <img id="zoomImage" src="" alt="Zoomed Image">
+  </div>
+
+  <script>
+    const imageIds = ["testimoniImage1", "testimoniImage2"];
     let currentIndex = 0;
     let autoSlideInterval;
     let direction = "right";
