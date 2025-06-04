@@ -83,20 +83,7 @@
     }
     .counter {
       font-size: 0.9rem;
-      color: #555;
-    }
-    .btn-wa {
-      margin-top: 20px;
-      display: inline-block;
-      background-color: #22c55e;
-      color: white;
-      padding: 12px 25px;
-      border: none;
-      border-radius: 8px;
-      text-decoration: none;
-      font-size: 1.1em;
-      font-weight: bold;
-      animation: float 6s ease-in-out infinite;
+      color: 6s ease-in-out infinite;
       box-shadow: 0 8px 24px rgba(34, 197, 94, 0.3);
     }
     .btn-wa:hover {
@@ -127,28 +114,23 @@
   <div class="container">
     <h2>Galeri Testimoni</h2>
     <div class="slider" onclick="openModal()">
-      <img id="testimoniImage1" class="glow-testi" src="https://files.catbox.moe/nx3kh3.jpg" /
-      <img id="Testimoniimage2" src="https://files.catbox.moe/nx3kh3.jpg" class="active" alt="Testimoni 2" />
+      <img id="testimoniImage1" class="glow-testi" src="https://files.catbox.moe/nx3kh3.jpg" alt="Testimoni 1" />
+      <img id="testimoniImage2" src="https://files.catbox.moe/nx3kh3.jpg" alt="Testimoni 2" />
     </div>
     <div class="nav-buttons">
       <button onclick="prevImage()" id="prevBtn">&#8592;</button>
       <button onclick="nextImage()" id="nextBtn">&#8594;</button>
     </div>
     <div class="counter" id="imageCounter">1 of 2</div>
-
     <a href="https://wa.me/6281234567890" target="_blank" class="btn-wa">Yuk Beli!</a>
   </div>
 
   <!-- Modal zoom -->
   <div id="zoomModal" class="modal" onclick="closeModal()">
-    <img id="zoomImage" src="" alt="Zoomed Testimoni">
-  </div>
-
-  <script>
-    const imageIds = ["testimoniImage1", "testimoniImage2"];
+   testimoniImage1", "testimoniImage2"];
     let currentIndex = 0;
     let autoSlideInterval;
-    let direction = "right"; // to track direction
+    let direction = "right";
 
     const counter = document.getElementById("imageCounter");
     const prevBtn = document.getElementById("prevBtn");
@@ -161,8 +143,6 @@
         const img = document.getElementById(id);
         img.classList.remove("active", "to-left");
         if (index === currentIndex) {
-          img.style.transform = "translateX(" + (direction === "left" ? "-100%" : "100%") + ")";
-          void img.offsetWidth; // force reflow
           img.classList.add("active");
         } else if (direction === "left") {
           img.classList.add("to-left");
