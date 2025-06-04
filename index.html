@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pernyataan Cinta</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #ffe6e6, #ffccff);
+      text-align: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    h1 {
+      color: #e60073;
+      margin-bottom: 30px;
+      animation: fadeIn 2s ease-out;
+    }
+
+    .btn {
+      background-color: #ff66b2;
+      border: none;
+      border-radius: 30px;
+      padding: 15px 25px;
+      margin: 10px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      transform: scale(1.1);
+    }
+
+    .response {
+      margin-top: 20px;
+      font-size: 20px;
+      color: #99004d;
+    }
+
+    .emoji {
+      position: fixed;
+      top: -30px;
+      font-size: 24px;
+      animation: fall 3s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>💌 Aku Punya Sesuatu Buat Kamu 💌</h1>
+
+  <button class="btn" onclick="showMessage('Aku suka kamu... 😳')">Aku suka kamu</button>
+  <button class="btn" onclick="showMessage('Mau jadi pacarku? 🥺')">Mau jadi pacarku?</button>
+  <button class="btn" onclick="goToNext()">Iya ❤️</button>
+  <button class="btn" id="btn-no">Enggak 😥</button>
+
+  <div class="response" id="response"></div>
+
+  <audio id="yaySound" src="yay.mp3" preload="auto"></audio>
+
+  <script>
+    function showMessage(msg) {
+      document.getElementById('response').textContent = msg;
+    }
+
+    // Tombol "Enggak" bergerak di Android
+    const btnNo = document.getElementById('btn-no');
+    btnNo.addEventListener('touchstart', moveButtonRandomly);
+    btnNo.addEventListener('mouseenter', moveButtonRandomly);
+
+    function moveButtonRandomly(e) {
+      const maxX = window.innerWidth - btnNo.offsetWidth;
+      const maxY = window.innerHeight - btnNo.offsetHeight;
+      btnNo.style.position = 'absolute';
+      btnNo.style.left = `${Math.random() * maxX}px`;
+      btnNo.style.top = `${Math.random() * maxY}px`;
+      e.preventDefault();
+    }
+
+    function goToNext() {
+      // Mainkan suara
+      const audio = document.getElementById('yaySound');
+      audio.play();
+
+      // Tampilkan hujan emoji
+      for (let i = 0; i < 30; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('emoji');
+        heart.textContent = '❤️';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDelay = (Math.random() * 3) + 's';
+        document.body.appendChild(heart);
+
+        // Hapus setelah jatuh
+        setTimeout(() => heart.remove(), 4000);
+      }
+
+      // Pindah ke halaman setelah delay
+      setTimeout(() => {
+        window.location.href = 'love.html';
+      }, 3000);
+    }
+  </script>
+
+</body>
+</html>
