@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>CrashBot Spaceman Predictor</title>
+  <title>Cashout Spaceman Recomend</title>
   <style>
     body {
       margin: 0;
@@ -50,7 +50,7 @@
       transform: scale(1.1);
     }
 
-    .planet.bulan {
+    .planet.moon {
       bottom: 5%;
       left: 40%;
     }
@@ -124,12 +124,12 @@
   </style>
 </head>
 <body>
-  <h1>🚀 CrashBot Spaceman Predictor</h1>
+  <h1>🚀 Cash out Spaceman Recommend</h1>
   <div id="gameArea">
     <div class="nebula"></div>
     <img src="https://files.catbox.moe/jhywct.png" class="planet saturnus">
     <img src="https://files.catbox.moe/hk0m1p.png" class="planet mars">
-    <img src="https://files.catbox.moe/s8z1xs.png" class="planet bulan">
+    <img src="https://files.catbox.moe/s8z1xs.png" class="planet moon">
     <div id="spaceman" class="spaceman">
       <img src="https://files.catbox.moe/hktywz.jpg" alt="Spaceman">
     </div>
@@ -137,7 +137,7 @@
   <input type="text" id="inputData" placeholder="Masukkan crash terakhir (cth: 1.2, 2.0, 3.1)">
   <br>
   <button onclick="analyze()">Analisa</button>
-  <div id="result">Masukkan data dan tekan Analisa</div>
+  <div id="result">Masukkin 5 Crash terakhir dan tekan Analisa!</div>
 
   <div id="chartContainer">
     <canvas id="crashChart" width="400" height="200"></canvas>
@@ -190,7 +190,7 @@
       const spaceman = document.getElementById("spaceman");
 
       if (data.length < 5) {
-        resultEl.innerText = "Minimal 5 data crash dibutuhkan.";
+        resultEl.innerText = "Minimal 5 data crash dibutuhkan der.";
         return;
       }
 
@@ -202,7 +202,7 @@
 
       let danger = "";
       if (avg >= 10.0 || lastHigh || recentHighFreq >= 3) {
-        danger = "\n\uD83D\uDEA8 BERBAHAYA, GUNAKAN MODAL KECIL!";
+        danger = "\n\uD83D\uDEA8 WADUH! , GUNAKAN MODAL KECIL!";
       }
 
       let trend = "\uD83D\uDD0D Stabil";
@@ -212,7 +212,7 @@
         trend = "\uD83D\uDD25 Crash panjang terjadi!";
       }
 
-      let rekomendasi = "\uD83D\uDCA1 Rekomendasi: ";
+      let rekomendasi = "\uD83D\uDCA1 rekomendasi: ";
       if (avg < 1.5) {
         rekomendasi += "Sangat Aman - Cashout di 1.3x";
         spaceman.style.top = "230px";
