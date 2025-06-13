@@ -41,11 +41,13 @@
     .planet.saturnus {
       top: 15%;
       left: 5%;
+      transform: rotate(-10deg);
     }
 
     .planet.mars {
       top: 50%;
       left: 85%;
+      transform: scale(1.1);
     }
 
     .planet.bulan {
@@ -109,6 +111,21 @@
       font-size: 16px;
     }
 
+    button {
+      background: linear-gradient(to bottom, #3a0c59, #000000);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(155, 89, 182, 0.7); }
+      70% { box-shadow: 0 0 0 10px rgba(155, 89, 182, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(155, 89, 182, 0); }
+    }
+
     #result {
       margin-top: 20px;
       font-size: 18px;
@@ -129,12 +146,12 @@
     <img src="https://files.catbox.moe/hk0m1p.png" class="planet mars">
     <img src="https://files.catbox.moe/s8z1xs.png" class="planet bulan">
     <div id="spaceman" class="spaceman">
-      <img src="https://files.catbox.moe/wulzud.png" alt="Spaceman">
+      <img src="https://files.catbox.moe/hktywz.jpg" alt="Spaceman">
     </div>
   </div>
   <input type="text" id="inputData" placeholder="Masukkan crash terakhir (cth: 1.2, 2.0, 3.1)">
   <br>
-  <button onclick="analyze()">Analisa</button>
+  <button onclick="analyze()">Mulai Analisis</button>
   <div id="result">Masukkan data dan tekan Analisa</div>
 
   <div id="chartContainer">
@@ -192,6 +209,14 @@
         return;
       }
 
+      const lastFive = data.slice(-5);
+      const highRecentCount = lastFive.filter(v => v > 5.0).length;
+
+      if (highRecentCount >= 3) {
+        resultEl.innerText = "⚠️ JANGAN PASANG! Terlalu banyak nilai tinggi di 5 crash terakhir.";
+        return;
+      }
+
       const avg = data.reduce((a, b) => a + b, 0) / data.length;
       const last = data[data.length - 1];
       const highCrashes = data.filter(n => n > 10);
@@ -200,7 +225,7 @@
 
       let danger = "";
       if (avg >= 10.0 || lastHigh || recentHighFreq >= 3) {
-        danger = "\n🚨 BERBAHAYA, GUNAKAN MODAL KECIL!";
+        danger = "\n\uD83D\uDEA8 BERBAHAYA, GUNAKAN MODAL KECIL!";
       }
 
       let trend = "\uD83D\uDD0D Stabil";
