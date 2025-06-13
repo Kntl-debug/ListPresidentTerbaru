@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Cashout Spaceman Recomend</title>
+  <title>CrashBot Spaceman Predictor</title>
   <style>
     body {
       margin: 0;
@@ -41,16 +41,14 @@
     .planet.saturnus {
       top: 15%;
       left: 5%;
-      transform: rotate(-10deg);
     }
 
     .planet.mars {
       top: 50%;
       left: 85%;
-      transform: scale(1.1);
     }
 
-    .planet.moon {
+    .planet.bulan {
       bottom: 5%;
       left: 40%;
     }
@@ -124,20 +122,20 @@
   </style>
 </head>
 <body>
-  <h1>🚀 Cash out Spaceman Recommend</h1>
+  <h1>🚀 CrashBot Spaceman Predictor</h1>
   <div id="gameArea">
     <div class="nebula"></div>
     <img src="https://files.catbox.moe/jhywct.png" class="planet saturnus">
     <img src="https://files.catbox.moe/hk0m1p.png" class="planet mars">
-    <img src="https://files.catbox.moe/s8z1xs.png" class="planet moon">
+    <img src="https://files.catbox.moe/s8z1xs.png" class="planet bulan">
     <div id="spaceman" class="spaceman">
-      <img src="https://files.catbox.moe/olnrjr.png" alt="Spaceman">
+      <img src="https://files.catbox.moe/wulzud.png" alt="Spaceman">
     </div>
   </div>
   <input type="text" id="inputData" placeholder="Masukkan crash terakhir (cth: 1.2, 2.0, 3.1)">
   <br>
   <button onclick="analyze()">Analisa</button>
-  <div id="result">Masukkin 5 Crash terakhir dan tekan Analisa!</div>
+  <div id="result">Masukkan data dan tekan Analisa</div>
 
   <div id="chartContainer">
     <canvas id="crashChart" width="400" height="200"></canvas>
@@ -190,7 +188,7 @@
       const spaceman = document.getElementById("spaceman");
 
       if (data.length < 5) {
-        resultEl.innerText = "Minimal 5 data crash dibutuhkan der.";
+        resultEl.innerText = "Minimal 5 data crash dibutuhkan.";
         return;
       }
 
@@ -202,7 +200,7 @@
 
       let danger = "";
       if (avg >= 10.0 || lastHigh || recentHighFreq >= 3) {
-        danger = "\n\uD83D\uDEA8 WADUH! , GUNAKAN MODAL KECIL!";
+        danger = "\n🚨 BERBAHAYA, GUNAKAN MODAL KECIL!";
       }
 
       let trend = "\uD83D\uDD0D Stabil";
@@ -212,7 +210,7 @@
         trend = "\uD83D\uDD25 Crash panjang terjadi!";
       }
 
-      let rekomendasi = "\uD83D\uDCA1 rekomendasi: ";
+      let rekomendasi = "\uD83D\uDCA1 Rekomendasi: ";
       if (avg < 1.5) {
         rekomendasi += "Sangat Aman - Cashout di 1.3x";
         spaceman.style.top = "230px";
