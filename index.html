@@ -1,96 +1,46 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bot Prediksi Spaceman</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #020202;
-            color: #ffffff;
-            padding: 20px;
-            text-align: center;
-        }
-        h1 {
-            color: #ffcc00;
-        }
-        #results {
-            margin-top: 20px;
-            border: 1px solid #ccc;
-            padding: 10px;
-            background-color: #333333;
-        }
-        #loading {
-            display: none;
-            font-size: 18px;
-            margin: 20px 0;
-            color: #ffcc00;
-        }
-        button {
-            background-color: #ffcc00;
-            color: #020202;
-            border: none;
-            padding: 10px 20px;
-            font-size: 18px;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-        button:hover {
-            background-color: #e6b800;
-        }
-        .floating-button {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            font-size: 20px;
-            padding: 15px 25px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>CrashBot Spaceman - Login</title>
+  <style>
+    body {
+      background: linear-gradient(to bottom, #6b21a8, #000);
+      color: white;
+      text-align: center;
+      font-family: sans-serif;
+      padding-top: 100px;
+    }
+    input, button {
+      padding: 10px;
+      margin: 10px;
+      font-size: 18px;
+      border-radius: 8px;
+      border: none;
+      width: 250px;
+    }
+    button {
+      background-color: #9333ea;
+      color: white;
+    }
+  </style>
 </head>
 <body>
-    <h1>Bot Prediksi Spaceman</h1>
-    <div id="loading">Memuat Analisis Data...</div>
-    <div id="results"></div>
-    <button class="floating-button" onclick="startPrediction()">Mulai Prediksi!</button>
+  <h1>🔐 Masukkan Kunci Akses</h1>
+  <input type="password" id="keyInput" placeholder="Ketik key di sini">
+  <br>
+  <button onclick="cekKey()">Masuk</button>
+  <p id="pesan"></p>
 
-    <script>
-        let history = [];
-
-        function startPrediction() {
-            document.getElementById('results').innerHTML = '';
-            document.getElementById('loading').style.display = 'block';
-            setTimeout(playGame, 2000); // Simulasi loading selama 2 detik
-        }
-
-        function playGame() {
-            const result = Math.random() < 0.5 ? 'Menang' : 'Kalah';
-            history.push(result);
-            document.getElementById('loading').style.display = 'none';
-            document.getElementById('results').innerHTML += `<p>Hasil Putaran: ${result}</p>`;
-            analyzeHistory();
-        }
-
-        function analyzeHistory() {
-            const wins = history.filter(result => result === 'Menang').length;
-            const losses = history.filter(result => result === 'Kalah').length;
-            const total = history.length;
-            const winRate = total > 0 ? (wins / total * 100).toFixed(2) : 0;
-
-            document.getElementById('results').innerHTML += `<p>Total Putaran: ${total}, Menang: ${wins}, Kalah: ${losses}, Persentase Menang: ${winRate}%</p>`;
-            predict(winRate);
-        }
-
-        function predict(winRate) {
-            let prediction;
-            if (winRate > 50) {
-                prediction = "Prediksi: Anda mungkin akan menang.";
-            } else {
-                prediction = "Prediksi: Jangan bertaruh terlalu banyak.";
-            }
-            document.getElementById('results').innerHTML += `<p>${prediction}</p>`;
-        }
-    </script>
+  <script>
+    function cekKey() {
+      const input = document.getElementById("keyInput").value;
+      if (input === "N312000") {
+        window.location.href = "main.html"; // ganti dengan file HTML asli kamu
+      } else {
+        document.getElementById("pesan").innerText = "❌ Kunci salah, bang!";
+      }
+    }
+  </script>
 </body>
 </html>
