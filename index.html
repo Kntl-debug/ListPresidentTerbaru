@@ -2,6 +2,7 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login VVIP CrashBot</title>
   <style>
     body {
@@ -17,26 +18,112 @@
       height: 100vh;
       overflow: hidden;
     }
+
     h1 {
       color: cyan;
       margin-bottom: 20px;
     }
+
     .login-box {
-      background: rgba(0,0,0,0.5);
+      background: rgba(0, 0, 0, 0.4);
       padding: 30px;
-      border-radius: 15px;
+      border-radius: 12px;
       border: 1px solid cyan;
+      box-shadow: 0 0 10px cyan;
+      width: 90%;
+      max-width: 300px;
     }
+
     input {
       display: block;
-      width: 220px;
-      padding: 10px;
-      margin: 10px auto;
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
       border: none;
-      border-radius: 5px;
       font-size: 16px;
     }
+
     button {
-      width: 240px;
-      padding: 10px;
-      background: limegreen;
+      width: 100%;
+      padding: 12px;
+      background-color: limegreen;
+      border: none;
+      border-radius: 8px;
+      color: black;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .notif {
+      position: fixed;
+      top: -60px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: lightgreen;
+      color: black;
+      padding: 12px 20px;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: top 0.4s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 999;
+    }
+
+    .notif.error {
+      background: pink;
+    }
+  </style>
+</head>
+<body>
+  <h1>🚀 Masuk ke VVIP CrashBot</h1>
+  <div class="login-box">
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="login()">Masuk Sekarang</button>
+  </div>
+
+  <div id="notif" class="notif">Key Valid!</div>
+
+  <script>
+    const users = {
+      "VVIP_2025": "PanggilSayaSir"
+    };
+
+    let attempts = 0;
+
+    function showNotif(msg, isError = false) {
+      const notif = document.getElementById("notif");
+      notif.textContent = msg;
+      notif.classList.toggle("error", isError);
+      notif.style.top = "20px";
+      setTimeout(() => notif.style.top = "-60px", 3000);
+    }
+
+    function login() {
+      const user = document.getElementById("username").value;
+      const pass = document.getElementById("password").value;
+
+      if (users[user] === pass) {
+        showNotif("Key Valid!");
+        setTimeout(() => window.location.href = "vvip_main.html", 1500);
+      } else {
+        attempts++;
+        showNotif("Key Invalid!", true);
+        if (attempts >= 5) {
+          alert("Anda diblokir selama 10 menit karena terlalu banyak percobaan gagal.");
+          document.querySelector("button").disabled = true;
+          setTimeout(() => {
+            attempts = 0;
+            document.querySelector("button").disabled = false;
+          }, 600000);
+        }
+      }
+    }
+  </script>
+</body>
+</html>
