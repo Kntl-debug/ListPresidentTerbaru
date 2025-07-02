@@ -1,1 +1,169 @@
-<!-- ✨ Halaman utama prediksi VVIP -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CrashBot VVIP | Prediction Panel</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #012935, #000000);
+      color: cyan;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      color: cyan;
+      margin-bottom: 10px;
+    }
+
+    .status {
+      background-color: rgba(0, 255, 255, 0.1);
+      padding: 10px;
+      border: 1px solid cyan;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    input, select, button {
+      padding: 10px;
+      font-size: 16px;
+      margin: 10px;
+      border-radius: 8px;
+      border: none;
+    }
+
+    input, select {
+      width: 200px;
+    }
+
+    button {
+      background-color: #00cc99;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #00b386;
+    }
+
+    .predictions {
+      display: flex;
+      overflow-x: auto;
+      margin-top: 20px;
+      gap: 10px;
+    }
+
+    .prediction-box {
+      min-width: 150px;
+      background-color: #01161d;
+      padding: 10px;
+      border: 1px solid cyan;
+      border-radius: 10px;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    #graph {
+      margin-top: 30px;
+    }
+
+    .footer {
+      margin-top: 40px;
+      font-size: 12px;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <h1>👑 Selamat Datang, Sir</h1>
+  <div class="status">CrashBot siap melayani prediksi jangka panjang Anda</div>
+
+  <input type="text" id="crashInput" placeholder="10 Crash Terakhir (cth: 1.5, 2.0)">
+  <input type="number" id="betAmount" placeholder="Taruhan Anda (cth: 10000)">
+  <select id="duration">
+    <option value="10">10 Menit</option>
+    <option value="30">30 Menit</option>
+    <option value="60">60 Menit</option>
+  </select>
+  <br>
+  <button onclick="startPrediction()">Mulai Prediksi 🚀</button>
+
+  <div class="predictions" id="predictionBoxes">
+    <!-- Box prediksi dinamis -->
+  </div>
+
+  <canvas id="graph" width="400" height="200"></canvas>
+
+  <div class="footer">*Usap ke atas untuk refresh</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    function startPrediction() {
+      const crashInput = document.getElementById("crashInput").value;
+      const bet = parseFloat(document.getElementById("betAmount").value);
+      const durasi = parseInt(document.getElementById("duration").value);
+      const boxes = document.getElementById("predictionBoxes");
+
+      if (!crashInput || isNaN(bet)) {
+        alert("Sir, mohon isi semua data dengan benar.");
+        return;
+      }
+
+      const crashData = crashInput.split(',').map(c => parseFloat(c.trim())).filter(n => !isNaN(n));
+      if (crashData.length < 10) {
+        alert("Data crash minimal 10, Sir.");
+        return;
+      }
+
+      boxes.innerHTML = '';
+      let predictions = [];
+
+      for (let i = 0; i < durasi; i++) {
+        const avg = crashData.reduce((a,b)=>a+b)/crashData.length;
+        let recommend = 1.2;
+        if (avg > 2) recommend = 1.5;
+        if (avg > 3) recommend = 1.8;
+        if (avg > 4) recommend = 2.0;
+
+        let message = `Menit ${i+1}:\n💰 Taruhan: ${bet.toLocaleString()} IDR\n📈 Rekomendasi: Cashout di ${recommend.toFixed(1)}x`;
+
+        const box = document.createElement("div");
+        box.className = "prediction-box";
+        box.innerText = message;
+        boxes.appendChild(box);
+
+        predictions.push(recommend);
+        crashData.push(recommend); crashData.shift(); // Simulasikan perubahan
+      }
+
+      renderGraph(predictions);
+    }
+
+    function renderGraph(data) {
+      const ctx = document.getElementById('graph').getContext('2d');
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: data.map((_, i) => `M${i+1}`),
+          datasets: [{
+            label: 'Prediksi Cashout',
+            data,
+            borderColor: 'cyan',
+            backgroundColor: 'rgba(0,255,255,0.2)',
+            tension: 0.4
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: { beginAtZero: true }
+          }
+        }
+      });
+    }
+  </script>
+</body>
+</html>
