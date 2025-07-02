@@ -1,1 +1,149 @@
-<!-- 🛡️ Panel Owner -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Owner Panel | CrashBot</title>
+  <style>
+    body {
+      background: linear-gradient(to bottom, #000000, #001a1a);
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #00ffff;
+      text-align: center;
+    }
+
+    .user-form {
+      background: #001818;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 400px;
+      margin: 20px auto;
+      box-shadow: 0 0 15px rgba(0,255,255,0.1);
+    }
+
+    input {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #00cc99;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      margin-top: 10px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #00b386;
+    }
+
+    .user-list {
+      background: #001010;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 600px;
+      margin: 20px auto;
+    }
+
+    .user-item {
+      padding: 10px;
+      border-bottom: 1px solid #00cccc;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .user-item:last-child {
+      border-bottom: none;
+    }
+
+    .delete-btn {
+      background-color: #cc0000;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    .delete-btn:hover {
+      background-color: #990000;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>👑 Owner Panel</h1>
+
+  <div class="user-form">
+    <h3>Tambah User Baru</h3>
+    <input type="text" id="newUsername" placeholder="Username Baru">
+    <input type="text" id="newPassword" placeholder="Password Baru">
+    <button onclick="addUser()">Tambah User</button>
+  </div>
+
+  <div class="user-list">
+    <h3>Daftar User Premium/VVIP</h3>
+    <div id="userContainer"></div>
+  </div>
+
+  <script>
+    // Simulasi daftar user
+    let userList = [
+      { username: "VVIP_2025", password: "PanggilSayaSir" }
+    ];
+
+    function displayUsers() {
+      const container = document.getElementById("userContainer");
+      container.innerHTML = "";
+      userList.forEach((user, index) => {
+        const item = document.createElement("div");
+        item.className = "user-item";
+        item.innerHTML = `
+          <span><strong>${user.username}</strong> | ${user.password}</span>
+          <button class="delete-btn" onclick="deleteUser(${index})">Hapus</button>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    function addUser() {
+      const user = document.getElementById("newUsername").value.trim();
+      const pass = document.getElementById("newPassword").value.trim();
+
+      if (user && pass) {
+        userList.push({ username: user, password: pass });
+        displayUsers();
+        document.getElementById("newUsername").value = "";
+        document.getElementById("newPassword").value = "";
+      } else {
+        alert("Isi username dan password dulu ya!");
+      }
+    }
+
+    function deleteUser(index) {
+      if (confirm("Yakin mau hapus user ini?")) {
+        userList.splice(index, 1);
+        displayUsers();
+      }
+    }
+
+    // Tampilkan user saat pertama kali
+    displayUsers();
+  </script>
+</body>
+</html>
