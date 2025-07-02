@@ -1,1 +1,115 @@
-<!-- 🔐 Login khusus Owner -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Owner Login | CrashBot</title>
+  <style>
+    body {
+      background: linear-gradient(to bottom, #001a1a, #000000);
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      color: #00ffff;
+      margin-bottom: 20px;
+    }
+
+    input {
+      display: block;
+      margin: 10px auto;
+      padding: 10px;
+      width: 80%;
+      max-width: 300px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #00cc99;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #00b386;
+    }
+
+    .notification {
+      position: fixed;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: white;
+      color: black;
+      padding: 12px 20px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+      transition: top 0.5s ease;
+    }
+
+    .notification.success {
+      border-left: 6px solid green;
+    }
+
+    .notification.error {
+      border-left: 6px solid red;
+    }
+  </style>
+</head>
+<body>
+  <h1>Login Owner Panel</h1>
+
+  <input type="text" id="username" placeholder="Username Owner">
+  <input type="password" id="password" placeholder="Password Owner">
+  <button onclick="loginOwner()">Login</button>
+
+  <div id="notification" class="notification"></div>
+
+  <script>
+    const OWNER_USERNAME = "AdminKing";
+    const OWNER_PASSWORD = "AccessPower2025";
+    let attempt = 0;
+
+    function showNotification(message, type = 'success') {
+      const notif = document.getElementById("notification");
+      notif.textContent = message;
+      notif.className = `notification ${type}`;
+      notif.style.top = "20px";
+      setTimeout(() => {
+        notif.style.top = "-100px";
+      }, 3000);
+    }
+
+    function loginOwner() {
+      const user = document.getElementById("username").value.trim();
+      const pass = document.getElementById("password").value.trim();
+
+      if (user === OWNER_USERNAME && pass === OWNER_PASSWORD) {
+        showNotification("Access Granted!", "success");
+        setTimeout(() => {
+          window.location.href = "owner-main.html";
+        }, 1500);
+      } else {
+        attempt++;
+        showNotification("Invalid credentials!", "error");
+        if (attempt >= 5) {
+          alert("Terlalu banyak percobaan. Silakan coba lagi 10 menit kemudian.");
+          document.querySelector("button").disabled = true;
+        }
+      }
+    }
+  </script>
+</body>
+</html>
